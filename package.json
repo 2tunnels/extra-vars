@@ -1,8 +1,8 @@
 {
-  "name": "typescript-action",
-  "version": "0.0.0",
+  "name": "extra-vars",
+  "version": "0.0.1",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "Export extra environment variables",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/2tunnels/extra-vars.git"
   },
   "keywords": [
     "actions",
