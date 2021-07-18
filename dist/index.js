@@ -41,6 +41,12 @@ const github = __importStar(__webpack_require__(438));
 const wait_1 = __webpack_require__(817);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
+        core.exportVariable('EXTRA_ACTION', github.context.action);
+        if (github.context.eventName === 'pull_request') {
+            const payload = github.context.payload;
+            core.exportVariable('EXTRA_PULL_REQUEST_TITLE', payload.pull_request.title);
+            core.exportVariable('EXTRA_PULL_REQUEST_TITLE', payload.pull_request.number);
+        }
         console.log(`Event name: ${github.context.eventName}`);
         const payload = github.context.payload;
         console.log(payload);

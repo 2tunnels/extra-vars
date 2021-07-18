@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
-import {PullRequestEvent} from '@octokit/webhooks-definitions/schema'
+import {PullRequestEvent} from '@octokit/webhooks-definitions/schema';
 import {wait} from './wait';
 
 async function run(): Promise<void> {
@@ -9,7 +9,10 @@ async function run(): Promise<void> {
   if (github.context.eventName === 'pull_request') {
     const payload = github.context.payload as PullRequestEvent;
     core.exportVariable('EXTRA_PULL_REQUEST_TITLE', payload.pull_request.title);
-    core.exportVariable('EXTRA_PULL_REQUEST_TITLE', payload.pull_request.number);
+    core.exportVariable(
+      'EXTRA_PULL_REQUEST_TITLE',
+      payload.pull_request.number
+    );
   }
 
   console.log(`Event name: ${github.context.eventName}`);
