@@ -3,6 +3,7 @@ import * as github from '@actions/github';
 import {wait} from './wait';
 
 async function run(): Promise<void> {
+  console.log(`Event name: ${github.context.eventName}`);
   const payload = github.context.payload;
   console.log(payload);
 
