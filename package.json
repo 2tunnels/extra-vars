@@ -1,6 +1,6 @@
 {
   "name": "extra-vars",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
   "description": "Export extra environment variables",
   "main": "lib/main.js",

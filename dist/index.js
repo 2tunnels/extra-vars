@@ -41,15 +41,17 @@ const github = __importStar(__webpack_require__(438));
 const wait_1 = __webpack_require__(817);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        core.exportVariable('EXTRA_ACTION', github.context.action);
-        if (github.context.eventName === 'pull_request') {
-            const payload = github.context.payload;
-            core.exportVariable('EXTRA_PULL_REQUEST_TITLE', payload.pull_request.title);
-            core.exportVariable('EXTRA_PULL_REQUEST_TITLE', payload.pull_request.number);
-        }
         console.log(`Event name: ${github.context.eventName}`);
-        const payload = github.context.payload;
-        console.log(payload);
+        console.log(github.context.payload);
+        if (github.context.payload.action !== undefined) {
+            core.exportVariable('EXTRA_ACTION', github.context.payload.action);
+        }
+        if (github.context.eventName === 'pull_request') {
+            const event = github.context.payload;
+            core.exportVariable('EXTRA_PULL_REQUEST_NUMBER', event.pull_request.number);
+            core.exportVariable('EXTRA_PULL_REQUEST_TITLE', event.pull_request.title);
+            core.exportVariable('EXTRA_PULL_REQUEST_STATE', event.pull_request.state);
+        }
         try {
             const ms = core.getInput('milliseconds');
             core.debug(`Waiting ${ms} milliseconds ...`); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
