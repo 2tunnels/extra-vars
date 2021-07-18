@@ -54,8 +54,15 @@ function run() {
             core.exportVariable('EXTRA_PULL_REQUEST_DELETIONS', event.pull_request.deletions);
             core.exportVariable('EXTRA_PULL_REQUEST_CHANGED_FILES', event.pull_request.changed_files);
             const token = core.getInput('token');
-            core.info(`Token: ${token}`);
-            core.info(token.length.toString());
+            if (token) {
+                const octokit = github.getOctokit(token);
+                const response = yield octokit.rest.pulls.listFiles({
+                    owner: github.context.repo.owner,
+                    repo: github.context.repo.repo,
+                    pull_number: event.pull_request.number
+                });
+                console.log(response);
+            }
         }
         try {
             const ms = core.getInput('milliseconds');
