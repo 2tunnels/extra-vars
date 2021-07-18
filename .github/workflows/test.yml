@@ -23,4 +23,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           milliseconds: 1000
-      - run: env | grep '^EXTRA_'
+      - run: env

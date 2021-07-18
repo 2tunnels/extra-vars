@@ -1,7 +1,6 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import {PullRequestEvent} from '@octokit/webhooks-definitions/schema';
-import {wait} from './wait';
 
 async function run(): Promise<void> {
   if (github.context.payload.action !== undefined) {
@@ -41,7 +40,7 @@ async function run(): Promise<void> {
       });
 
       const statuses = response.data.map(file => file.status);
-      console.log(statuses);
+      core.info(statuses.toString());
 
       const filesChanged = response.data.map(file => file.filename);
       core.exportVariable(
@@ -65,19 +64,6 @@ async function run(): Promise<void> {
         filesModified.join('\n') + '\n'
       );
     }
-  }
-
-  try {
-    const ms: string = core.getInput('milliseconds');
-    core.debug(`Waiting ${ms} milliseconds ...`); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-
-    core.debug(new Date().toTimeString());
-    await wait(parseInt(ms, 10));
-    core.debug(new Date().toTimeString());
-
-    core.setOutput('time', new Date().toTimeString());
-  } catch (error) {
-    core.setFailed(error.message);
   }
 }
 
