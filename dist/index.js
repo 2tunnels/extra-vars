@@ -41,6 +41,7 @@ const github = __importStar(__webpack_require__(438));
 const wait_1 = __webpack_require__(817);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log(`Event name: ${github.context.eventName}`);
         const payload = github.context.payload;
         console.log(payload);
         try {
