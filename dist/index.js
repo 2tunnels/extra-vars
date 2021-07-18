@@ -51,6 +51,10 @@ function run() {
             core.exportVariable('EXTRA_PULL_REQUEST_NUMBER', event.pull_request.number);
             core.exportVariable('EXTRA_PULL_REQUEST_TITLE', event.pull_request.title);
             core.exportVariable('EXTRA_PULL_REQUEST_STATE', event.pull_request.state);
+            core.exportVariable('EXTRA_PULL_REQUEST_COMMITS', event.pull_request.commits);
+            core.exportVariable('EXTRA_PULL_REQUEST_ADDITIONS', event.pull_request.additions);
+            core.exportVariable('EXTRA_PULL_REQUEST_DELETIONS', event.pull_request.deletions);
+            core.exportVariable('EXTRA_PULL_REQUEST_CHANGED_FILES', event.pull_request.changed_files);
         }
         try {
             const ms = core.getInput('milliseconds');
