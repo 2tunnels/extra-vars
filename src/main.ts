@@ -39,7 +39,31 @@ async function run(): Promise<void> {
         repo: github.context.repo.repo,
         pull_number: event.pull_request.number
       });
-      console.log(response);
+
+      const statuses = response.data.map(file => file.status);
+      console.log(statuses);
+
+      const filesChanged = response.data.map(file => file.filename);
+      core.exportVariable(
+        'EXTRA_PULL_REQUEST_FILES_CHANGED',
+        filesChanged.join('\n') + '\n'
+      );
+
+      const filesAdded = response.data
+        .filter(file => file.status === 'added')
+        .map(file => file.filename);
+      core.exportVariable(
+        'EXTRA_PULL_REQUEST_FILES_ADDED',
+        filesAdded.join('\n') + '\n'
+      );
+
+      const filesModified = response.data
+        .filter(file => file.status === 'modified')
+        .map(file => file.filename);
+      core.exportVariable(
+        'EXTRA_PULL_REQUEST_FILES_MODIFIED',
+        filesModified.join('\n') + '\n'
+      );
     }
   }
 
