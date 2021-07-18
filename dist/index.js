@@ -41,8 +41,6 @@ const github = __importStar(__webpack_require__(438));
 const wait_1 = __webpack_require__(817);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log(`Event name: ${github.context.eventName}`);
-        console.log(github.context.payload);
         if (github.context.payload.action !== undefined) {
             core.exportVariable('EXTRA_ACTION', github.context.payload.action);
         }
@@ -55,6 +53,9 @@ function run() {
             core.exportVariable('EXTRA_PULL_REQUEST_ADDITIONS', event.pull_request.additions);
             core.exportVariable('EXTRA_PULL_REQUEST_DELETIONS', event.pull_request.deletions);
             core.exportVariable('EXTRA_PULL_REQUEST_CHANGED_FILES', event.pull_request.changed_files);
+            const token = core.getInput('token');
+            core.info(`Token: ${token}`);
+            core.info(token.length.toString());
         }
         try {
             const ms = core.getInput('milliseconds');

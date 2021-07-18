@@ -4,9 +4,6 @@ import {PullRequestEvent} from '@octokit/webhooks-definitions/schema';
 import {wait} from './wait';
 
 async function run(): Promise<void> {
-  console.log(`Event name: ${github.context.eventName}`);
-  console.log(github.context.payload);
-
   if (github.context.payload.action !== undefined) {
     core.exportVariable('EXTRA_ACTION', github.context.payload.action);
   }
@@ -32,6 +29,11 @@ async function run(): Promise<void> {
       'EXTRA_PULL_REQUEST_CHANGED_FILES',
       event.pull_request.changed_files
     );
+
+    const token = core.getInput('token');
+
+    core.info(`Token: ${token}`);
+    core.info(token.length.toString());
   }
 
   try {
