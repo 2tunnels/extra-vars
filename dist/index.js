@@ -146,7 +146,8 @@ function run() {
         if (github.context.eventName === 'pull_request') {
             return yield exportPullRequestVariables(prefix, octokit);
         }
-        if (github.context.eventName == 'push') {
+        // Export push related variables
+        if (github.context.eventName === 'push') {
             return yield exportPushVariables(prefix, octokit);
         }
     });
