@@ -32,8 +32,38 @@ This action exports additional environment variables for the next steps after it
 <tbody>
 <tr>
 <td><code>EXTRA_EVENT_NAME</code></td>
-<td>Name of the event triggered workflow</td>
+<td>Name of the event triggered workflow.</td>
 <td><code>pull_request</code>, <code>push</code></td>
+<td>Always</td>
+</tr>
+<tr>
+<td><code>EXTRA_SHA</code></td>
+<td>Commit SHA.</td>
+<td><code>29d982b587a828d359f70fd5d74c39b2ed8b1ae7</code></td>
+<td>Always</td>
+</tr>
+<tr>
+<td><code>EXTRA_REF</code></td>
+<td>The full git ref that was pushed.</td>
+<td><code>refs/heads/main</code></td>
+<td>Always</td>
+</tr>
+<tr>
+<td><code>EXTRA_WORKFLOW</code></td>
+<td>Current workflow name.</td>
+<td><code>build</code>, <code>test</code></td>
+<td>Always</td>
+</tr>
+<tr>
+<td><code>EXTRA_REPO_OWNER</code></td>
+<td>Repository owner.</td>
+<td><code>2tunnels</code>, <code>actions</code></td>
+<td>Always</td>
+</tr>
+<tr>
+<td><code>EXTRA_REPO_NAME</code></td>
+<td>Repository name.</td>
+<td><code>extra-vars</code>, <code>toolkit</code></td>
 <td>Always</td>
 </tr>
 </tbody>
