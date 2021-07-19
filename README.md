@@ -2,7 +2,7 @@
 
 # Extra environment variables
 
-This action exports few additional environment variables for the following steps so that it would be easier to create custom workflows without thinking about how to pass output variables or context variables to you scripts.
+This action exports additional environment variables for the next steps after it. GitHub Actions provides some environment variables. However, sometimes you might need some value that can be `grep`ed from the provided environment variables, parsed from the context JSON file, or fetched from API. This action tries to fill this gap by getting these values for you and exporting them as environment variables for easy scripting.
 
 ## Usage
 
@@ -15,7 +15,7 @@ This action exports few additional environment variables for the following steps
     echo "Pull request number: ${EXTRA_PULL_REQUEST_NUMBER}"
 
     # Run mypy linter only for changed python files
-    echo $EXTRA_FILES_CHANGED | grep '.py' | xargs mypy
+    echo $EXTRA_FILES_CHANGED | grep '.py$' | xargs mypy
 ```
 
 ## Variables
@@ -31,9 +31,9 @@ This action exports few additional environment variables for the following steps
 </thead>
 <tbody>
 <tr>
-<td>`EXTRA_EVENT_NAME`</td>
+<td><code>EXTRA_EVENT_NAME</code></td>
 <td>Name of the event triggered workflow</td>
-<td>`pull_request`, `push`</td>
+<td><code>pull_request</code>, <code>push</code></td>
 <td>Always</td>
 </tr>
 </tbody>

@@ -1,5 +1,5 @@
 name: 'Extra environment variables'
-description: 'Export extra environment variables for the following steps'
+description: 'Exports additional environment variables for the next steps after it'
 author: 'Vlad Dmitrievich'
 inputs:
   token:
