@@ -9,7 +9,10 @@ inputs:
   prefix:
     required: true
     description: 'Prefix for environment variables'
-    default: EXTRA
+    default: 'EXTRA'
 runs:
   using: 'node12'
   main: 'dist/index.js'
+branding:
+  icon: 'dollar-sign'
+  color: 'gray-dark'
