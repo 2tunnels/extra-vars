@@ -61,6 +61,8 @@ async function run(): Promise<void> {
   const prefix = core.getInput('prefix');
   const octokit = github.getOctokit(token);
 
+  core.info(`Event name: ${github.context.eventName}`);
+
   // Export general variables
   if (github.context.payload.action !== undefined) {
     core.exportVariable(`${prefix}_ACTION`, github.context.payload.action);
