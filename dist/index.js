@@ -38,41 +38,65 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__webpack_require__(186));
 const github = __importStar(__webpack_require__(438));
+function exportVar(name, val) {
+    if (Array.isArray(val)) {
+        core.exportVariable(name, `${val.join('\n')}\n`);
+    }
+    else {
+        core.exportVariable(name, val.toString());
+    }
+}
+function exportPullRequestVariables(prefix, octokit) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const event = github.context.payload;
+        const pull_request = event.pull_request;
+        const namespace = `${prefix}_PULL_REQUEST`;
+        // Export variables from context
+        exportVar(`${namespace}_NUMBER`, pull_request.number);
+        exportVar(`${namespace}_TITLE`, pull_request.title);
+        exportVar(`${namespace}_STATE`, pull_request.state);
+        exportVar(`${namespace}_COMMITS`, pull_request.commits);
+        exportVar(`${namespace}_ADDITIONS`, pull_request.additions);
+        exportVar(`${namespace}_DELETIONS`, pull_request.deletions);
+        exportVar(`${namespace}_CHANGED_FILES`, pull_request.changed_files);
+        // Export variables from API
+        const response = yield octokit.rest.pulls.listFiles({
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            pull_number: pull_request.number
+        });
+        const filesChanged = response.data.map(file => file.filename);
+        const filesAdded = response.data
+            .filter(file => file.status === 'added')
+            .map(file => file.filename);
+        const filesModified = response.data
+            .filter(file => file.status === 'modified')
+            .map(file => file.filename);
+        const filesRemoved = response.data
+            .filter(file => file.status === 'removed')
+            .map(file => file.filename);
+        const filesRenamed = response.data
+            .filter(file => file.status === 'renamed')
+            .map(file => file.filename);
+        exportVar(`${namespace}_FILES_CHANGED`, filesChanged);
+        exportVar(`${namespace}_FILES_ADDED`, filesAdded);
+        exportVar(`${namespace}_FILES_MODIFIED`, filesModified);
+        exportVar(`${namespace}_FILES_REMOVED`, filesRemoved);
+        exportVar(`${namespace}_FILES_RENAMED`, filesRenamed);
+    });
+}
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
+        const token = core.getInput('token');
+        const prefix = core.getInput('prefix');
+        const octokit = github.getOctokit(token);
+        // Export general variables
         if (github.context.payload.action !== undefined) {
-            core.exportVariable('EXTRA_ACTION', github.context.payload.action);
+            core.exportVariable(`${prefix}_ACTION`, github.context.payload.action);
         }
+        // Export pull request related variables
         if (github.context.eventName === 'pull_request') {
-            const event = github.context.payload;
-            core.exportVariable('EXTRA_PULL_REQUEST_NUMBER', event.pull_request.number);
-            core.exportVariable('EXTRA_PULL_REQUEST_TITLE', event.pull_request.title);
-            core.exportVariable('EXTRA_PULL_REQUEST_STATE', event.pull_request.state);
-            core.exportVariable('EXTRA_PULL_REQUEST_COMMITS', event.pull_request.commits);
-            core.exportVariable('EXTRA_PULL_REQUEST_ADDITIONS', event.pull_request.additions);
-            core.exportVariable('EXTRA_PULL_REQUEST_DELETIONS', event.pull_request.deletions);
-            core.exportVariable('EXTRA_PULL_REQUEST_CHANGED_FILES', event.pull_request.changed_files);
-            const token = core.getInput('token');
-            if (token) {
-                const octokit = github.getOctokit(token);
-                const response = yield octokit.rest.pulls.listFiles({
-                    owner: github.context.repo.owner,
-                    repo: github.context.repo.repo,
-                    pull_number: event.pull_request.number
-                });
-                const statuses = response.data.map(file => file.status);
-                core.info(statuses.toString());
-                const filesChanged = response.data.map(file => file.filename);
-                core.exportVariable('EXTRA_PULL_REQUEST_FILES_CHANGED', filesChanged.join('\n') + '\n');
-                const filesAdded = response.data
-                    .filter(file => file.status === 'added')
-                    .map(file => file.filename);
-                core.exportVariable('EXTRA_PULL_REQUEST_FILES_ADDED', filesAdded.join('\n') + '\n');
-                const filesModified = response.data
-                    .filter(file => file.status === 'modified')
-                    .map(file => file.filename);
-                core.exportVariable('EXTRA_PULL_REQUEST_FILES_MODIFIED', filesModified.join('\n') + '\n');
-            }
+            return yield exportPullRequestVariables(prefix, octokit);
         }
     });
 }

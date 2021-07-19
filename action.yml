@@ -3,12 +3,13 @@ description: 'Export extra environment variables for the following jobs'
 author: 'Vlad Dmitrievich'
 inputs:
   token:
-    required: false
-    description: 'Authentication token'
-  milliseconds: # change this
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'Authentication token'
+    default: ${{ github.token }}
+  prefix:
+    required: true
+    description: 'Prefix for environment variables'
+    default: EXTRA
 runs:
   using: 'node12'
   main: 'dist/index.js'
