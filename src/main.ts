@@ -130,7 +130,7 @@ async function run(): Promise<void> {
     return await exportPullRequestVariables(prefix, octokit);
   }
 
-  if (github.context.eventName == 'push') {
+  if (github.context.eventName === 'push') {
     return await exportPushVariables(prefix, octokit);
   }
 }
