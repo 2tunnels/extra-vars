@@ -66,5 +66,17 @@ This action exports additional environment variables for the next steps after it
 <td><code>extra-vars</code>, <code>toolkit</code></td>
 <td>Always</td>
 </tr>
+<tr>
+<td><code>EXTRA_PAYLOAD_ACTION</code></td>
+<td>Activity that triggered the event. (https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#webhook-payload-object-common-properties)</td>
+<td><code>synchronize</code>, <code>closed</code></td>
+<td>Most events</td>
+</tr>
+<tr>
+<td><code>EXTRA_FILES_CHANGED</code></td>
+<td>Multiline list of changed (added, modified, removed and renamed) files.</td>
+<td><code>foo.ts<br>bar.js<br>baz.py</code></td>
+<td><code>pull_request</code> and <code>push</code></td>
+</tr>
 </tbody>
 </table>
