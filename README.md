@@ -78,5 +78,71 @@ This action exports additional environment variables for the next steps after it
 <td>foo.ts<br>bar.js<br>baz.py</td>
 <td><code>pull_request</code> and <code>push</code></td>
 </tr>
+<tr>
+<td><code>EXTRA_FILES_ADDED</code></td>
+<td>Multiline list of added files.</td>
+<td>foo.ts<br>bar.js<br>baz.py</td>
+<td><code>pull_request</code> and <code>push</code></td>
+</tr>
+<tr>
+<td><code>EXTRA_FILES_MODIFIED</code></td>
+<td>Multiline list of modified files.</td>
+<td>foo.ts<br>bar.js<br>baz.py</td>
+<td><code>pull_request</code> and <code>push</code></td>
+</tr>
+<tr>
+<td><code>EXTRA_FILES_REMOVED</code></td>
+<td>Multiline list of removed files.</td>
+<td>foo.ts<br>bar.js<br>baz.py</td>
+<td><code>pull_request</code> and <code>push</code></td>
+</tr>
+<tr>
+<td><code>EXTRA_FILES_RENAMED</code></td>
+<td>Multiline list of renamed files.</td>
+<td>foo.ts<br>bar.js<br>baz.py</td>
+<td><code>pull_request</code> and <code>push</code></td>
+</tr>
+<tr>
+<td><code>EXTRA_PULL_REQUEST_NUMBER</code></td>
+<td>Pull request number.</td>
+<td><code>1</code></td>
+<td><code>pull_request</code></td>
+</tr>
+<tr>
+<td><code>EXTRA_PULL_REQUEST_TITLE</code></td>
+<td>Pull request title.</td>
+<td><code>Fix</code></td>
+<td><code>pull_request</code></td>
+</tr>
+<tr>
+<td><code>EXTRA_PULL_REQUEST_STATE</code></td>
+<td>Pull request state.</td>
+<td><code>open</code>, <code>closed</code></td>
+<td><code>pull_request</code></td>
+</tr>
+<tr>
+<td><code>EXTRA_PULL_REQUEST_COMMITS</code></td>
+<td>Number of commits in current pull request.</td>
+<td><code>1</code></td>
+<td><code>pull_request</code></td>
+</tr>
+<tr>
+<td><code>EXTRA_PULL_REQUEST_ADDITIONS</code></td>
+<td>Number of added lines in current pull request.</td>
+<td><code>1</code></td>
+<td><code>pull_request</code></td>
+</tr>
+<tr>
+<td><code>EXTRA_PULL_REQUEST_DELETIONS</code></td>
+<td>Number of deleted lines in current pull request.</td>
+<td><code>1</code></td>
+<td><code>pull_request</code></td>
+</tr>
+<tr>
+<td><code>EXTRA_PULL_REQUEST_CHANGED_FILES</code></td>
+<td>Number of changed files in current pull request.</td>
+<td><code>1</code></td>
+<td><code>pull_request</code></td>
+</tr>
 </tbody>
 </table>
