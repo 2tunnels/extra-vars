@@ -75,7 +75,7 @@ This action exports additional environment variables for the next steps after it
 <tr>
 <td><code>EXTRA_FILES_CHANGED</code></td>
 <td>Multiline list of changed (added, modified, removed and renamed) files.</td>
-<td><code>foo.ts<br>bar.js<br>baz.py</code></td>
+<td>foo.ts<br>bar.js<br>baz.py</td>
 <td><code>pull_request</code> and <code>push</code></td>
 </tr>
 </tbody>
