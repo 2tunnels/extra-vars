@@ -62,7 +62,7 @@ async function exportPullRequestVariables(
 async function exportPushVariables(
   prefix: string,
   octokit: InstanceType<typeof GitHub>
-) {
+): Promise<void> {
   const event = github.context.payload as PushEvent;
   const namespace = `${prefix}_PUSH`;
 
