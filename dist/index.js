@@ -40,7 +40,7 @@ const core = __importStar(__webpack_require__(186));
 const github = __importStar(__webpack_require__(438));
 function exportVar(name, val) {
     if (Array.isArray(val)) {
-        core.exportVariable(name, `${val.join('\n')}\n`);
+        core.exportVariable(name, val.join('\n'));
     }
     else {
         core.exportVariable(name, val.toString());

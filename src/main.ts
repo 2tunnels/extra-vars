@@ -8,7 +8,7 @@ import {
 
 function exportVar(name: string, val: string | string[] | number): void {
   if (Array.isArray(val)) {
-    core.exportVariable(name, `${val.join('\n')}\n`);
+    core.exportVariable(name, val.join('\n'));
   } else {
     core.exportVariable(name, val.toString());
   }
