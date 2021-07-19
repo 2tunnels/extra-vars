@@ -1,4 +1,4 @@
-#!/bin/sh -eu
+#!/bin/bash
 
 if [[ -n "$EXTRA_PULL_REQUEST_NUMBER" ]]; then
     echo "Workflow was triggered by pull request: ${EXTRA_PULL_REQUEST_TITLE} (${EXTRA_PULL_REQUEST_NUMBER})"
@@ -8,8 +8,10 @@ if [[ -n "$EXTRA_PUSH_REF" ]]; then
     echo "Workflow was triggered by push: ${EXTRA_PUSH_REF}, before SHA: ${EXTRA_PUSH_BEFORE}, after SHA: ${EXTRA_PUSH_AFTER}"
 fi
 
-echo "Changed files:"
-echo "$EXTRA_FILES_CHANGED"
+if [[ -n "$EXTRA_FILES_CHANGED" ]]; then
+    echo "Changed files:"
+    echo "$EXTRA_FILES_CHANGED"
+fi
 
 CHANGED_TS_FILES=$(echo "$EXTRA_FILES_CHANGED" | grep '.ts$')
 
