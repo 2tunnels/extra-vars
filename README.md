@@ -39,7 +39,7 @@ This action exports additional environment variables for the next steps after it
 <tr>
 <td><code>EXTRA_SHA</code></td>
 <td>Commit SHA.</td>
-<td><code>29d982b587a828d359f70fd5d74c39b2ed8b1ae7</code></td>
+<td><code>29d...ae7</code></td>
 <td>Always</td>
 </tr>
 <tr>
